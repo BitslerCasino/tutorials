@@ -25,3 +25,14 @@ section #title .credits {
   flex-wrap: nowrap;
   justify-content: space-between;
 }
+h3 {
+  color:#d4e157;
+}
+ul {
+  list-style-image: none;
+  list-style-type: square;
+}
+ul ul, ol ul {
+  list-style-image: none;
+  list-style-type: circle;
+}
