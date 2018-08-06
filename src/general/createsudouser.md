@@ -4,13 +4,13 @@ The  `sudo`  command provides a mechanism for granting administrator privileges,
 
 ### Steps
 
- 1.  Log in to your server as the  `root`  user.
+ 1. Log in to your server as the  `root`  user.
  
 ```bash
 local$ ssh root@server_ip
 ```
 
- 2.  Create a new user account using the  `adduser`  command. Don’t forget to replace  `username`  with the user name that you want to create.
+ 2. Create a new user account using the  `adduser`  command. Don’t forget to replace  `username`  with the user name that you want to create.
 
 ```bash
 server$ adduser username
