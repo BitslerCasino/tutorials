@@ -36,8 +36,13 @@ EOSIO comes with a number of programs. The primary ones that you will use, and t
     
 -   Patience is required
 
-### Create a Sudo User
-Follow this [tutorial](/tutorials/src/general/createsudouser.md) on how to Create a Sudo User
+### Create and Login to a Sudo User
+Follow this [tutorial](src/general/createsudouser.md) on how to Create a Sudo User, then login to that user.
+
+### Update Apt cache
+```bash
+sudo apt update
+```
 
 ### Git Installation
 ```bash
@@ -46,7 +51,7 @@ sudo apt install git
 
 ### Cmake Installation/upgrade
 Skip this step if your cmake version is above or equal to 3.4.3 by checking `cmake --version`
-Remove old cmake version to avoid errors.
+Remove old cmake version if it exists to avoid errors.
 ```bash 
 sudo apt purge --auto-remove cmake
 sudo rm -rf /usr/local/bin/cmake
@@ -59,17 +64,24 @@ sudo apt update && sudo apt install cmake
 Check your cmake version. `cmake --version`. If cmake version is not 3.5.x, you may need to logout of your ssh session and login again.
 
 ### Nodejs Installation
+For Nodejs v10 (recommended)
+```bash
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+sudo apt install -y nodejs
+sudo apt install -y build-essential
+```
+For Nodejs v8
 ```bash
 curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-sudo apt  install -y nodejs
-sudo apt-get install -y build-essential
+sudo apt install -y nodejs
+sudo apt install -y build-essential
 ```
 
 ### EOS Installation
 The installation steps below assumes that you have met the requirements above.
 Getting the code source of EOS via git clone.
 ```bash
-git  clone https://github.com/EOSIO/eos --recursive
+git clone https://github.com/EOSIO/eos --recursive
 ```
 Building using Autobuild script.
 ```bash
