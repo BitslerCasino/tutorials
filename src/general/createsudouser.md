@@ -40,4 +40,4 @@ Is the information correct? [Y/n]
 server$ usermod -aG sudo username
 ```
 
-[Home](./)
+[Home](/tutorials/)
