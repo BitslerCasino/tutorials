@@ -1,0 +1,10 @@
+---
+---
+
+@import "{{ site.theme }}";
+.wrapper {
+  max-width: 1040px;
+  section {
+    max-width: 1040px;
+  }
+}
