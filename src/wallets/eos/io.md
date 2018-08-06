@@ -37,7 +37,7 @@ EOSIO comes with a number of programs. The primary ones that you will use, and t
 -   Patience is required
 
 ### Create a Sudo User
-Follow this [tutorial](/tutorials/general/createsudouser.md) on how to Create a Sudo User
+Follow this [tutorial](/tutorials/src/general/createsudouser.md) on how to Create a Sudo User
 
 ### Git Installation
 ```bash
@@ -80,3 +80,5 @@ Once build is finished run:
 ```bash
 ./eosio_install.sh
 ```
+
+[Home](/tutorials/)
