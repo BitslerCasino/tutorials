@@ -41,8 +41,8 @@ Follow this [tutorial](/tutorials/src/general/createsudouser.md) on how to Creat
 
 ### Git Installation
 ```bash
- sudo apt install git
- ```
+sudo apt install git
+```
 
 ### Cmake Installation/upgrade
 Skip this step if your cmake version is above or equal to 3.4.3 by checking `cmake --version`

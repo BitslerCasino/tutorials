@@ -39,5 +39,9 @@ Is the information correct? [Y/n]
 ```bash
 server$ usermod -aG sudo username
 ```
+#### 4. Exit and Login to the new user
+```bash
+server$ exit
+```
 
 [Home](/tutorials/)
