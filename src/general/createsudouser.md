@@ -6,9 +6,10 @@ The  `sudo`  command provides a mechanism for granting administrator privileges,
 
  1.  Log in to your server as the  `root`  user.
  
- ```bash
+```bash
 local$ ssh root@server_ip
- ```  
+```
+
  2.  Create a new user account using the  `adduser`  command. Don’t forget to replace  `username`  with the user name that you want to create.
 
 ```bash
@@ -37,7 +38,9 @@ server$ adduser username
         Other []:
     Is the information correct? [Y/n]
     ```
+
 3. Use the usermod command to add the user to the sudo group.
-  ```bash
+
+```bash
   server$ usermod -aG sudo username
-  ```
+```
