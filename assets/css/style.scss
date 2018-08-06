@@ -1,6 +1,5 @@
 ---
 ---
-
 @import "{{ site.theme }}";
 .wrapper {
   max-width: 1040px;
@@ -13,4 +12,10 @@
   li.fork {
     float: right;
   }
+}
+.browserupgrade {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
 }
