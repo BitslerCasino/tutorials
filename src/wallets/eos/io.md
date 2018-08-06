@@ -37,7 +37,7 @@ EOSIO comes with a number of programs. The primary ones that you will use, and t
 -   Patience is required
 
 ### Create and Login to a Sudo User
-Follow this [tutorial](../general/createsudouser.md) on how to Create a Sudo User, then login to that user.
+Follow this [tutorial](../../general/createsudouser.md) on how to Create a Sudo User, then login to that user.
 
 ### Update Apt cache
 ```bash
