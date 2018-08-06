@@ -1,4 +1,8 @@
 
+---
+layout: default
+---
+
 ## Creating a Sudo User on Ubuntu 16.04
 
 The  `sudo`  command provides a mechanism for granting administrator privileges, ordinarily only available to the root user, to normal users. This guide will show you the easiest way to create a new user with sudo access on Ubuntu, without having to modify your server's  `sudoers`  file. If you want to configure sudo for an existing user, simply skip to step 3.
@@ -36,3 +40,5 @@ Is the information correct? [Y/n]
 ```bash
 server$ usermod -aG sudo username
 ```
+
+[Home](./)
