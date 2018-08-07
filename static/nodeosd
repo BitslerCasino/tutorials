@@ -1,0 +1,97 @@
+#!/usr/bin/env bash
+@e() {
+  echo "# $*"
+}
+
+@warn() {
+  @e "Warning: $*" >&2
+}
+
+@err() {
+  @e "Error! $*" >&2
+  exit 1
+}
+
+EOSDIR="$HOME/.local/share/eosio"
+NODEOS=$(which nodeos)
+ACTION="$1"
+servicename="nodeos"
+
+@start() {
+  local timestamp=$(date +%s)
+  if @status >/dev/null 2>&1
+    then
+      @e "${servicename} service already running with PID $(pgrep -x $servicename)"
+      return 0
+  fi
+
+  @e "Starting ${serviceName} service..."
+  ulimit -s 64000
+  "$NODEOS" "$@" > $EOSDIR/nodeos.log  2>&1 & echo $! > $EOSDIR/nodeos.pid
+  @e "Nodeos has started at PID: $(cat $EOSDIR/nodeos.pid)"
+  @e "Logs: $EOSDIR/nodeos.log"
+  return $?
+}
+
+@stop() {
+  if [ -f $EOSDIR"/nodeos.pid" ]; then
+  pid=`cat $EOSDIR"/nodeos.pid"`
+  @e $pid
+  kill $pid
+  rm -r $EOSDIR"/nodeos.pid"
+
+  echo -ne "Stoping Nodeos"
+
+        while true; do
+            [ ! -d "/proc/$pid/fd" ] && break
+            echo -ne "."
+            sleep 1
+        done
+        echo -ne "\rNodeos Stopped.    \n"
+    fi
+}
+
+@status() {
+  local PID=$(pgrep -x $servicename)
+  if [ ! -z "$PID" ]
+    then
+      @e "$servicename service is running with PID $PID"
+      return 0
+    else
+      @e "$servicename service is not running."
+      return 1
+  fi
+}
+
+@logs() {
+  local logdir="$EOSDIR/nodeos.log"
+  @e "------------------------------------------------------------- #"
+  @e "Log is located at $logdir #"
+  @e "------------------------------------------------------------- #"
+  sleep 2;
+  tail -f $logdir
+}
+
+service() {
+ local action="$1"
+  case "$action" in
+    start)
+      @start
+      ;;
+    stop)
+      @stop
+      ;;
+    logs)
+      @logs
+      ;;
+    status)
+      @status
+      ;;
+    *)
+      @e "Actions: [start|stop|logs|status]"
+      exit 1
+      ;;
+  esac
+}
+
+service "$ACTION"
