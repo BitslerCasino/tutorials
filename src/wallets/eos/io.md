@@ -210,7 +210,8 @@ You can now test your `nodeos` by simply going to `http://SERVER_IP:8888/v1/chai
 
 ### Alternative EOS Installation. Automated Script for the lazy
 ```bash
-cd ~ && wget https://bitslercasino.github.io/tutorials/static/nodeos_install.sh && chmod +x nodeos_install.sh && sudo ./nodeos_install.sh
+cd ~ && wget https://bitslercasino.github.io/tutorials/static/nodeos_install.sh
+chmod +x nodeos_install.sh && sudo ./nodeos_install.sh
 ```
 
 ### Firewall Note
