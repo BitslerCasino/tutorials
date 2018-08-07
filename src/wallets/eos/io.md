@@ -4,7 +4,7 @@ layout: default
 
 
 ## Basic Installation and Usage of EOSIO v1.1.3 on Ubuntu 16.04
-![eosio-image](https://cdn-images-1.medium.com/max/800/1*t-JGDBRk9__B2-odKWUl2A.jpeg)
+![eosio-image](https://cdn-images-1.medium.com/max/800/1*t-JGDBRk9__B2-odKWUl2A.jpeg){: .img-header }
 ###### NOTE: All Installation steps below have been tested on a CLEAN install of Ubuntu 16.04**
 
 ### Introduction
@@ -186,7 +186,8 @@ nodeos --genesis-json genesis.json
 ### EOS nodeos as a Deamon
 Stop any running `nodeos` by pressing `ctrl+c` then download this simple bash file.
 ```bash
-cd ~ && wget https://bitslercasino.github.io/tutorials/static/nodeosd && chmod +x nodeosd && sudo ln -s ~/nodeosd /usr/local/bin/
+cd ~ && wget https://bitslercasino.github.io/tutorials/static/nodeosd 
+chmod +x nodeosd && sudo ln -s ~/nodeosd /usr/local/bin/
 ```
 To start `nodeos`:
 ```bash
