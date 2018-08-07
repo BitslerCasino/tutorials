@@ -7,10 +7,14 @@ This page consists of common and basic tutorials about anything related but not 
 
 ### Crypto Currency Wallets
 - Bitcoin[BTC]
-	- [Bitcoin Core](src/wallets/btc/core.md)
+	- [Bitcoin Core Installation](src/wallets/btc/core.md)
+  - [Bitcoin Core Nodejs Implementation](src/wallets/btc/core.md)
 - Ethereum[ETH]
-	- [Parity](src/wallets/eth/parity.md)
+	- [Parity Installation](src/wallets/eth/parity.md)
+  - [Parity Nodejs Implementation](src/wallets/eth/parity.md)
 - Litecoin[LTC]
-	- [Litecoin Core](src/wallets/ltc/core.md)
+	- [Litecoin Core Installation](src/wallets/ltc/core.md)
+  - [Litecoin Core Nodejs Implementation](src/wallets/ltc/core.md)
 - EOSIO[EOS]
-	- [EOSIO](src/wallets/eos/io.md)
+	- [EOSIO Installation](src/wallets/eos/io.md)
+  - [EOSIO Nodejs Implementation](src/wallets/eos/io-node.md)
