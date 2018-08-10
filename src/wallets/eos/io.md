@@ -39,6 +39,13 @@ EOSIO comes with a number of programs. The primary ones that you will use, and t
 ### Installation Time
 - `50-60 Minutes`(without build validation)  `90-120 Minutes`(with build validation)
 
+### Alternative EOS Installation. Automated Script for the lazy
+```bash
+cd ~ && wget https://bitslercasino.github.io/tutorials/static/nodeos_install.sh
+chmod +x nodeos_install.sh && sudo ./nodeos_install.sh
+```
+You don't need to to do everything below if you use this automated script.
+
 ### Create and Login to a Sudo User
 Follow this [tutorial](../../general/createsudouser.md) on how to Create a Sudo User, then login to that user.
 
@@ -207,12 +214,6 @@ nodeosd logs
 ```
 
 You can now test your `nodeos` by simply going to `http://SERVER_IP:8888/v1/chain/get_info` if you get a successfull json response it means `nodeos` is working perfectly.
-
-### Alternative EOS Installation. Automated Script for the lazy
-```bash
-cd ~ && wget https://bitslercasino.github.io/tutorials/static/nodeos_install.sh
-chmod +x nodeos_install.sh && sudo ./nodeos_install.sh
-```
 
 ### Firewall Note
 Make sure to allow and open ports `9876`, `80`, `443`, `22` and `8888`
