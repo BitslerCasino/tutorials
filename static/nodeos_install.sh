@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 # MIT License
 # 
@@ -123,7 +122,7 @@ cd ~/eos && ./eosio_build.sh
 cd ~/eos && sudo ./eosio_install.sh
 chown -R $SESSION_USER ~/eos
 chown -R $SESSION_USER ~/opt
-chown -R $SESSION_USER ~/.local/share/eos
+
 [[ -x "$(command -v nodeos)" ]] && @e "Successfully installed nodeos"
 
 sleep 3
@@ -132,11 +131,7 @@ sleep 3
 
 cd ~ && wget https://eosnodes.privex.io/static/genesis.json
 chown -R $SESSION_USER ~/genesis.json
-timeout 5s nodeos --genesis-json genesis.json
-
-@e "Backing up config.ini"
-mv ~/.local/share/eosio/nodeos/config/config.ini ~/.local/share/eosio/nodeos/config/config.ini.bak
-
+timeout 1s nodeos --genesis-json genesis.json >/dev/null 2>&1
 @e "Adding configuration"
 
 NODEIP=$(curl icanhazip.com || curl ifconfig.io ||curl ifconfig.co)
@@ -144,7 +139,7 @@ NODEIP=$(curl icanhazip.com || curl ifconfig.io ||curl ifconfig.co)
 tee ~/.local/share/eosio/nodeos/config/config.ini <<EOF >/dev/null
 get-transactions-time-limit = 3
 blocks-dir = "blocks"
-http-server-address = 0.0.0.0:8888
+http-server-address = 0.0.0.0:8080
 p2p-listen-endpoint = 0.0.0.0:9876
 p2p-server-address = $NODEIP:9876
 chain-state-db-size-mb = 16384
@@ -187,9 +182,10 @@ p2p-peer-address = bp.cryptolions.io:9876
 p2p-peer-address = peering1.mainnet.eosasia.one:80
 p2p-peer-address = peering2.mainnet.eosasia.one:80
 EOF
-
-timeout 5s nodeos || (@clearstate && timeout 5s nodeos --genesis-json genesis.json)
-
+@clearstate
+chown -R $SESSION_USER ~/.local
+timeout 5s nodeos --genesis-json genesis.json
+chown -R $SESSION_USER ~/.local
 @e "Configuring Daemon"
 
 cd ~ && wget https://bitslercasino.github.io/tutorials/static/nodeosd 
