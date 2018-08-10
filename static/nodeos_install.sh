@@ -184,7 +184,7 @@ p2p-peer-address = peering2.mainnet.eosasia.one:80
 EOF
 @clearstate
 chown -R $SESSION_USER ~/.local
-timeout 5s nodeos --genesis-json genesis.json
+timeout 5s nodeos --genesis-json genesis.json >/dev/null 2>&1
 chown -R $SESSION_USER ~/.local
 @e "Configuring Daemon"
 
