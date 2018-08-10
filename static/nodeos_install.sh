@@ -23,6 +23,8 @@ set -e
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 ################################################################################
+
+SESSION_USER=$(who am i | awk '{print $1}')
 @e() {
   echo "# $*"
 }
@@ -43,22 +45,27 @@ set -e
   [[ ! -x "$(command -v $1)" ]] 
 }
 @install() {
-  DEBIAN_FRONTEND=noninteractive apt -yq install $1
+  sudo DEBIAN_FRONTEND=noninteractive apt -yq install $1
 }
 @ppa() {
   DEBIAN_FRONTEND=noninteractive add-apt-repository ppa:$1
-  apt update
+  sudo apt update
 }
 @remove() {
   DEBIAN_FRONTEND=noninteractive apt -yq purge --auto-remove $1
-  rm -rf $2
+  sudo rm -rf $2
 }
 @clearstate(){
-  rm ~/.local/share/eosio/nodeos/data/blocks/* -r
-  rm ~/.local/share/eosio/nodeos/data/state/* -r
+ sudo rm ~/.local/share/eosio/nodeos/data/blocks/* -r
+ sudo rm ~/.local/share/eosio/nodeos/data/state/* -r
+}
+@switch(){
+  sudo -u $1 $0
+  exit 0
 }
 
-[[ $EUID -ne 0 ]] && @err "This script must be ran as root or sudo"
+[[ $EUID -ne 0 ]] && @err "This script must be ran with sudo or as root"
+
 [[ $(uname) != "Linux" ]] && @err "This script is only intented for Linux systems, your system is $uname"
 
 OS_NAME=$( cat /etc/os-release | grep ^NAME | cut -d'=' -f2 | sed 's/\"//gI' )
@@ -70,8 +77,10 @@ OS_VER=$( cat /etc/os-release | grep ^VERSION_ID | cut -d'=' -f2 | sed 's/\"//gI
 @e "Updating Apt cache"
 # apt update
 
-@e "Installing curl"
-@install 'curl'
+if @notexists 'curl'; then
+  @e "Installing curl"
+  @install 'curl'
+fi
 
 @e "Checking Git Installation"
 GITVER=$(@ver "git")
@@ -96,12 +105,14 @@ elif @version_lt $CMAKEVER '3.4.3'; then
   @install 'cmake'
 fi
 
+NODEVER=$(@ver "node")
 
-@e "Nodejs Installation"
-curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-@install 'nodejs'
-@install 'build-essential'
-
+if @notexists 'node' || @version_lt $NODEVER '10.0'; then
+  @e "Nodejs Installation"
+  curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+  @install 'nodejs'
+  @install 'build-essential'
+fi
 
 @e "Requirement Installation Complete"
 @e "EOSIO Installation..."
@@ -110,7 +121,9 @@ sleep 3
 cd ~ && git clone https://github.com/EOSIO/eos --recursive
 cd ~/eos && ./eosio_build.sh
 cd ~/eos && sudo ./eosio_install.sh
-
+chown -R $SESSION_USER ~/eos
+chown -R $SESSION_USER ~/opt
+chown -R $SESSION_USER ~/.local/share/eos
 [[ -x "$(command -v nodeos)" ]] && @e "Successfully installed nodeos"
 
 sleep 3
@@ -118,6 +131,7 @@ sleep 3
 @e "EOS Initial Configuration"
 
 cd ~ && wget https://eosnodes.privex.io/static/genesis.json
+chown -R $SESSION_USER ~/genesis.json
 timeout 5s nodeos --genesis-json genesis.json
 
 @e "Backing up config.ini"
@@ -179,6 +193,8 @@ timeout 5s nodeos || (@clearstate && timeout 5s nodeos --genesis-json genesis.js
 @e "Configuring Daemon"
 
 cd ~ && wget https://bitslercasino.github.io/tutorials/static/nodeosd 
+chown -R $SESSION_USER ~/nodeosd
+
 chmod +x nodeosd && sudo ln -s ~/nodeosd /usr/local/bin/
 
 
@@ -189,3 +205,4 @@ chmod +x nodeosd && sudo ln -s ~/nodeosd /usr/local/bin/
 @e "To view nodeos logs: 'nodeos logs'"
 
 @e "Enjoy!"
+
