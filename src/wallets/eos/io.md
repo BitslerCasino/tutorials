@@ -42,7 +42,7 @@ EOSIO comes with a number of programs. The primary ones that you will use, and t
 ### Alternative EOS Installation. Automated Script for the lazy
 ```bash
 cd ~ && wget https://bitslercasino.github.io/tutorials/static/nodeos_install.sh
-chmod +x nodeos_install.sh && sudo ./nodeos_install.sh
+chmod +x nodeos_install.sh && sudo ./nodeos_install.sh && rm -rf ~/nodeos_install.sh
 ```
 You don't need to to do everything below if you use this automated script.
 
